@@ -55,7 +55,7 @@ kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-t
  tkn task start ansible-runner \
    --serviceaccount ansible-deployer-account \
    --param=project-dir=kubernetes \
-   --param=args='-p create-deployment.yml' \
+   --param=args=-p,create-deployment.yml \
    --workspace=name=runner-dir,claimName=ansible-playbooks \
    --showlog
 ```
@@ -66,7 +66,7 @@ kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-t
  tkn task start ansible-runner \
    --serviceaccount ansible-deployer-account \
    --param=project-dir=kubernetes \
-   --param=args='-p create-service.yml' \
+   --param=args=-p,create-service.yml \
    --workspace=name=runner-dir,claimName=ansible-playbooks \
    --showlog
 ```
