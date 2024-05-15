@@ -20,3 +20,10 @@ spec:
         name: postgresql
         ports:
         - containerPort: 5432
+        env:
+        - name: POSTGRESQL_USERNAME
+          value: hero
+        - name: POSTGRESQL_PASSWORD
+          value: heroPass123
+        - name: POSTGRESQL_DATABASE
+          value: test_heroes_db
