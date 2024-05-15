@@ -14,7 +14,7 @@ kubectl config set-context --current --namespace=tekton-temp
 tkn hub install task git-clone --version 0.9
 tkn hub install task ansible-runner --version 0.2
 
-kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/lab/main/tekton/ansible-runner-temp-db/playbooks-pvc.yaml
+kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-temp-db/master/playbooks-pvc.yaml
 ```
 
 ## Examples
@@ -24,7 +24,7 @@ Run the following Task to clone this repository
 ```shell
 tkn task start git-clone \
   --workspace=name=output,claimName=ansible-playbooks \
-  --param=url=https://github.com/micha-aucoin/tektoncd-ansible-runner-example \
+  --param=url=https://github.com/micha-aucoin/ansible-runner-temp-db.git \
   --param=revision=master \
   --param=deleteExisting=true \
   --showlog
@@ -35,7 +35,7 @@ tkn task start git-clone \
 You need proper RBAC in Kubernetes to allow it to perform the example tasks:
 
 ```shell
-kubectl apply -f  https://raw.githubusercontent.com/micha-aucoin/tektoncd-ansible-runner-example/master/kubernetes/ansible-deployer.yaml
+kubectl apply -f https://github.com/micha-aucoin/ansible-runner-temp-db/blob/master/kubernetes/ansible-deployer.yaml
 ```
 
 ### Listing pods
