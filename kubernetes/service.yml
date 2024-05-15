@@ -4,6 +4,7 @@ metadata:
   labels:
     app: test-db
   name: test-db
+  namespace: tekton-temp
 spec:
   ports:
   - port: 5432
