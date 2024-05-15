@@ -35,7 +35,7 @@ tkn task start git-clone \
 You need proper RBAC in Kubernetes to allow it to perform the example tasks:
 
 ```shell
-kubectl apply -f https://github.com/micha-aucoin/ansible-runner-temp-db/blob/master/kubernetes/ansible-deployer.yaml
+kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-temp-db/master/kubernetes/ansible-deployer.yaml
 ```
 
 ### Listing pods
