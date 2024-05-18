@@ -13,7 +13,7 @@
     - name: Get the Service
       k8s_info:
         kind: Service
-        namespace: tekton_temp
+        namespace: tekton-temp
       register: tekton_temp_service_list
 
     - name: Log Service Details
