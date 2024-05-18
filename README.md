@@ -70,3 +70,25 @@ kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-t
    --workspace=name=runner-dir,claimName=ansible-playbooks \
    --showlog
 ```
+
+### Delete Deployment
+
+```shell
+ tkn task start ansible-runner \
+   --serviceaccount ansible-deployer-account \
+   --param=project-dir=kubernetes \
+   --param=args=-p,delete-deployment.yml \
+   --workspace=name=runner-dir,claimName=ansible-playbooks \
+   --showlog
+```
+
+### Delete Service
+
+```shell
+ tkn task start ansible-runner \
+   --serviceaccount ansible-deployer-account \
+   --param=project-dir=kubernetes \
+   --param=args=-p,delete-service.yml \
+   --workspace=name=runner-dir,claimName=ansible-playbooks \
+   --showlog
+```

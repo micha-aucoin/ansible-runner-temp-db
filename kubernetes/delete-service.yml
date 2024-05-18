@@ -3,9 +3,9 @@
   collections:
     - kubernetes.core
   tasks:
-    - name: Create a new Service
+    - name: Delete Postgres Service
       k8s:
-        state: present
+        state: absent
         src: service.yml
         wait: yes
       register: test_db_svc
