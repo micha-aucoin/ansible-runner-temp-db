@@ -5,7 +5,8 @@ A repo to hold Ansible runner examples for the Tektoncd Task `ansible-runner`
 ## Namespace Context
 ```shell
 kubectl create ns tekton-temp && \
-kubectl config set-context --current --namespace=tekton-temp
+kubectl create ns dummy && \
+kubectl config set-context --current --namespace=dummy
 ```
 
 ## Common Tasks

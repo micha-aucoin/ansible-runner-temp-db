@@ -2,12 +2,13 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: ansible-deployer-account
-  namespace: tekton-temp
+  namespace: dummy
 ---
-kind: ClusterRole
+kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: ansible-deployer
+  namespace: tekton-temp
 rules:
   # Core API
   - apiGroups: ['']
@@ -23,14 +24,15 @@ rules:
     verbs: ['get', 'list', 'create', 'update', 'delete', 'patch', 'watch']
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
   name: ansible-deployer-binding
+  namespace: tekton-temp
 subjects:
   - kind: ServiceAccount
     name: ansible-deployer-account
-    namespace: tekton-temp
+    namespace: dummy
 roleRef:
-  kind: ClusterRole
+  kind: Role
   name: ansible-deployer
   apiGroup: rbac.authorization.k8s.io
