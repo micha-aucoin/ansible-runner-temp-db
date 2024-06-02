@@ -5,8 +5,8 @@
   tasks:
     - name: Create a new deployment
       k8s:
-        state: {{ lookup('env', 'K8S_DEPLOY_STATE' }}
-        src: {{ lookup('env', 'K8S_DEPLOY_LOCATION' }}
+        state: {{ state }}
+        src: {{ src }}
         wait: yes
       register: deployment
 

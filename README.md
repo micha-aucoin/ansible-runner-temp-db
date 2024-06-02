@@ -56,7 +56,7 @@ kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-t
  tkn task start ansible-runner \
    --serviceaccount ansible-deployer-account \
    --param=project-dir=playbooks \
-   --param=args=-p,deployment.yml,-e,'{"K8S_DEPLOY_STATE": "present","K8S_DEPLOY_LOCATION": "../kubernetes/hero-pg/deployment.yaml"}' \
+   --param=args=-p,deployment.yml,--cmdline,"--extra-vars 'state=present src=../kubernetes/hero-pg/deployment.yaml'" \
    --workspace=name=runner-dir,claimName=ansible-playbooks \
    --showlog
 ```
@@ -67,7 +67,7 @@ kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-t
  tkn task start ansible-runner \
    --serviceaccount ansible-deployer-account \
    --param=project-dir=playbooks \
-   --param=args=-p,service.yml,-e,'{"K8S_SERVICE_STATE": "present","K8S_SERVICE_LOCATION": "../kubernetes/hero-pg/service.yaml"}' \
+   --param=args=-p,service.yml,--cmdline,"--extra-vars 'state=present src=../kubernetes/hero-pg/service.yaml'" \
    --workspace=name=runner-dir,claimName=ansible-playbooks \
    --showlog
 ```
@@ -78,7 +78,7 @@ kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-t
  tkn task start ansible-runner \
    --serviceaccount ansible-deployer-account \
    --param=project-dir=playbooks \
-   --param=args=-p,deployment.yml,-e,'{"K8S_DEPLOY_STATE": "absent","K8S_DEPLOY_LOCATION": "../kubernetes/hero-pg/deployment.yaml"}' \
+   --param=args=-p,deployment.yml,--cmdline,"--extra-vars 'state=absent src=../kubernetes/hero-pg/deployment.yaml'" \
    --workspace=name=runner-dir,claimName=ansible-playbooks \
    --showlog
 ```
@@ -89,7 +89,7 @@ kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-t
  tkn task start ansible-runner \
    --serviceaccount ansible-deployer-account \
    --param=project-dir=playbooks \
-   --param=args=-p,service.yml,-e,'{"K8S_SERVICE_STATE": "absent","K8S_SERVICE_LOCATION": "../kubernetes/hero-pg/service.yaml"}' \
+   --param=args=-p,service.yml,--cmdline,"--extra-vars 'state=absent src=../kubernetes/hero-pg/service.yaml'" \
    --workspace=name=runner-dir,claimName=ansible-playbooks \
    --showlog
 ```

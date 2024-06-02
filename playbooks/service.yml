@@ -5,8 +5,8 @@
   tasks:
     - name: Create a new Service
       k8s:
-        state: {{ lookup('env', 'K8S_SERVICE_STATE' }}
-        src: {{ lookup('env', 'K8S_SERVICE_LOCATION' }}
+        state: {{ state }}
+        src: {{ src }}
         wait: yes
       register: svc
 
