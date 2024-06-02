@@ -3,12 +3,12 @@
   collections:
     - kubernetes.core
   tasks:
-    - name: Delete Postgres deployment
+    - name: Create a new deployment
       k8s:
-        state: absent
-        src: deployment.yml
+        state: {{ lookup('env', 'K8S_DEPLOY_STATE' }}
+        src: {{ lookup('env', 'K8S_DEPLOY_LOCATION' }}
         wait: yes
-      register: test_db_deployment
+      register: deployment
 
     - name: Get the Deployment
       k8s_info:

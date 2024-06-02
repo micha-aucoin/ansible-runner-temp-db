@@ -2,18 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: test-db
-  name: test-db
+    app: backstage-pg
+  name: backstage-pg
   namespace: tekton-temp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: test-db
+      app: backstage-pg
   template:
     metadata:
       labels:
-        app: test-db
+        app: backstage-pg
     spec:
       containers:
       - image: bitnami/postgresql:13
@@ -22,8 +22,6 @@ spec:
         - containerPort: 5432
         env:
         - name: POSTGRESQL_USERNAME
-          value: hero
+          value: backstage
         - name: POSTGRESQL_PASSWORD
-          value: heroPass123
-        - name: POSTGRESQL_DATABASE
-          value: test_heroes_db
+          value: backstagePass123

@@ -15,7 +15,7 @@ kubectl config set-context --current --namespace=dummy
 tkn hub install task git-clone --version 0.9
 tkn hub install task ansible-runner --version 0.2
 
-kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-temp-db/master/playbooks-pvc.yaml
+kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-temp-db/the-addition/kubernetes/playbooks-pvc.yaml
 ```
 
 ## Examples
@@ -26,7 +26,7 @@ Run the following Task to clone this repository
 tkn task start git-clone \
   --workspace=name=output,claimName=ansible-playbooks \
   --param=url=https://github.com/micha-aucoin/ansible-runner-temp-db.git \
-  --param=revision=master \
+  --param=revision=the-addition \
   --param=deleteExisting=true \
   --showlog
 ```
@@ -36,7 +36,7 @@ tkn task start git-clone \
 You need proper RBAC in Kubernetes to allow it to perform the example tasks:
 
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-temp-db/master/kubernetes/ansible-deployer.yaml
+kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-temp-db/the-addition/kubernetes/ansible-deployer.yaml
 ```
 
 ### Listing pods
@@ -44,7 +44,7 @@ kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-t
 ```shell
  tkn task start ansible-runner \
    --serviceaccount ansible-deployer-account \
-   --param=project-dir=kubernetes \
+   --param=project-dir=playbooks \
    --param=args=-p,list-pods.yml \
    --workspace=name=runner-dir,claimName=ansible-playbooks \
    --showlog
@@ -55,8 +55,8 @@ kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-t
 ```shell
  tkn task start ansible-runner \
    --serviceaccount ansible-deployer-account \
-   --param=project-dir=kubernetes \
-   --param=args=-p,create-deployment.yml \
+   --param=project-dir=playbooks \
+   --param=args=-p,deployment.yml,-e,'{"K8S_DEPLOY_STATE": "present","K8S_DEPLOY_LOCATION": "../kubernetes/hero-pg/deployment.yaml"}' \
    --workspace=name=runner-dir,claimName=ansible-playbooks \
    --showlog
 ```
@@ -66,8 +66,8 @@ kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-t
 ```shell
  tkn task start ansible-runner \
    --serviceaccount ansible-deployer-account \
-   --param=project-dir=kubernetes \
-   --param=args=-p,create-service.yml \
+   --param=project-dir=playbooks \
+   --param=args=-p,service.yml,-e,'{"K8S_SERVICE_STATE": "present","K8S_SERVICE_LOCATION": "../kubernetes/hero-pg/service.yaml"}' \
    --workspace=name=runner-dir,claimName=ansible-playbooks \
    --showlog
 ```
@@ -77,8 +77,8 @@ kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-t
 ```shell
  tkn task start ansible-runner \
    --serviceaccount ansible-deployer-account \
-   --param=project-dir=kubernetes \
-   --param=args=-p,delete-deployment.yml \
+   --param=project-dir=playbooks \
+   --param=args=-p,deployment.yml,-e,'{"K8S_DEPLOY_STATE": "absent","K8S_DEPLOY_LOCATION": "../kubernetes/hero-pg/deployment.yaml"}' \
    --workspace=name=runner-dir,claimName=ansible-playbooks \
    --showlog
 ```
@@ -88,8 +88,8 @@ kubectl apply -f https://raw.githubusercontent.com/micha-aucoin/ansible-runner-t
 ```shell
  tkn task start ansible-runner \
    --serviceaccount ansible-deployer-account \
-   --param=project-dir=kubernetes \
-   --param=args=-p,delete-service.yml \
+   --param=project-dir=playbooks \
+   --param=args=-p,service.yml,-e,'{"K8S_SERVICE_STATE": "absent","K8S_SERVICE_LOCATION": "../kubernetes/hero-pg/service.yaml"}' \
    --workspace=name=runner-dir,claimName=ansible-playbooks \
    --showlog
 ```
