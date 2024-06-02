@@ -3,22 +3,23 @@
   collections:
     - kubernetes.core
   tasks:
-    - name: Delete Postgres Service
+    - name: Create a new Service
       k8s:
-        state: absent
-        src: service.yml
+        state: "{{ state }}"
+        src: "{{ src }}"
         wait: yes
-      register: test_db_svc
+      register: svc
 
     - name: Get the Service
       k8s_info:
         kind: Service
         namespace: tekton-temp
-      register: tekton_temp_service_list
+      register: tekton_temp_svc_list
 
     - name: Log Service Details
       debug:
         msg: "{{ item | json_query('metadata.name') }}"
-      loop: '{{tekton_temp_service_list.resources}}'
+      loop: "{{tekton_temp_svc_list.resources}}"
       loop_control:
         label: "Service (Namespace: {{item | json_query('metadata.namespace')}})"
+

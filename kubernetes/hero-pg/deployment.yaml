@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hero-pg
+  name: hero-pg
+  namespace: tekton-temp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hero-pg
+  template:
+    metadata:
+      labels:
+        app: hero-pg
+    spec:
+      containers:
+      - image: bitnami/postgresql:13
+        name: postgresql
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRESQL_USERNAME
+          value: hero
+        - name: POSTGRESQL_PASSWORD
+          value: heroPass123
+        - name: POSTGRESQL_DATABASE
+          value: test_heroes_db

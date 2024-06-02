@@ -3,12 +3,12 @@
   collections:
     - kubernetes.core
   tasks:
-    - name: Delete Postgres deployment
+    - name: Create a new deployment
       k8s:
-        state: absent
-        src: deployment.yml
+        state: "{{ state }}"
+        src: "{{ src }}"
         wait: yes
-      register: test_db_deployment
+      register: deployment
 
     - name: Get the Deployment
       k8s_info:
@@ -19,6 +19,6 @@
     - name: Log Deployment Details
       debug:
         msg: "{{ item | json_query('metadata.name') }}"
-      loop: '{{tekton_temp_deployments_list.resources}}'
+      loop: "{{tekton_temp_deployments_list.resources}}"
       loop_control:
         label: "Deployment (Namespace: {{item | json_query('metadata.namespace')}},Replicas:{{ item | json_query('spec.replicas')}})"
