@@ -5,8 +5,8 @@
   tasks:
     - name: Create a new Service
       k8s:
-        state: {{ state }}
-        src: {{ src }}
+        state: '{{ state }}'
+        src: '{{ src }}'
         wait: yes
       register: svc
 

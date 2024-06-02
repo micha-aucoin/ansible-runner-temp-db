@@ -5,8 +5,8 @@
   tasks:
     - name: Create a new deployment
       k8s:
-        state: {{ state }}
-        src: {{ src }}
+        state: '{{ state }}'
+        src: '{{ src }}'
         wait: yes
       register: deployment
 
