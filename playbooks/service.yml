@@ -5,8 +5,8 @@
   tasks:
     - name: Create a new Service
       k8s:
-        state: '{{ state }}'
-        src: '{{ src }}'
+        state: "{{ state }}"
+        src: "{{ src }}"
         wait: yes
       register: svc
 
@@ -19,7 +19,7 @@
     - name: Log Service Details
       debug:
         msg: "{{ item | json_query('metadata.name') }}"
-      loop: '{{tekton_temp_svc_list.resources}}'
+      loop: "{{tekton_temp_svc_list.resources}}"
       loop_control:
         label: "Service (Namespace: {{item | json_query('metadata.namespace')}})"
 
