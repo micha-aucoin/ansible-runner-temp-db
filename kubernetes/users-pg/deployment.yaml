@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: users-pg
+  name: users-pg
+  namespace: tekton-temp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users-pg
+  template:
+    metadata:
+      labels:
+        app: users-pg
+    spec:
+      containers:
+      - image: bitnami/postgresql:13
+        name: postgresql
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRESQL_USERNAME
+          value: users
+        - name: POSTGRESQL_PASSWORD
+          value: usersPass123
+        - name: POSTGRESQL_DATABASE
+          value: test_users_db
